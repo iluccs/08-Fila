@@ -5,6 +5,7 @@ using namespace std;
 struct NO {
 	int valor;
 	NO* prox;
+	NO* ant;
 };
 
 NO* inicio = NULL;
@@ -88,13 +89,36 @@ void insere()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
+	if (inicio == NULL)
+	{
+		inicio = novo;
+		fim = novo;
+	}
+	else
+	{
+		fim->ant = novo;
+		fim = novo;
+	}
+
+	cout << "Elemento " << novo->valor << "inserido na fila.\n";
 
 }
 
 void remove()
 {
 
+	if (inicio == NULL) {
+		cout << "Fila Vazia\n";
+		return;
+	}
 
+	NO* temp = inicio;
+	inicio = inicio->ant;
+	if (inicio == NULL) {
+		fim = NULL;
+	}
 
+	cout << "Elemento removido: " << temp->valor << endl;
+
+	free(temp);
 }
-
